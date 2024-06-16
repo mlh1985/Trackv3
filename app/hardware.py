@@ -1,4 +1,11 @@
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+    is_raspberry_pi = True
+except (ImportError, RuntimeError):
+    from unittest import mock
+    GPIO = mock.MagicMock()
+    is_raspberry_pi = False
+
 from time import sleep
 #GPIO
 GPIO.setmode(GPIO.BCM)
@@ -28,3 +35,6 @@ def read_finish_line():
 
 def cleanup():
     GPIO.cleanup()
+    
+if not is_raspberry_pi:
+    print("Running on non-Raspberry Pi environment, using mock GPIO")

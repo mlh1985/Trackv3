@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, url_for, jsonify
+from werkzeug.urls import url_quote_plus  # Updated import
 from app import app, db
 from app.forms import LoginForm, CarSubmissionForm
 from app.models import User, Race, Car
@@ -24,6 +25,14 @@ def submit_car():
         # Your form submission logic here
         return redirect(url_for('index'))
     return render_template('submit_car.html', title='Submit Car', form=form)
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    return render_template('admin_dashboard.html', title='Admin Dashboard')
+
+@app.route('/troopmaster_dashboard')
+def troopmaster_dashboard():
+    return render_template('troopmaster_dashboard.html', title='Troopmaster Dashboard')
 
 @app.route('/race_official_dashboard')
 def race_official_dashboard():

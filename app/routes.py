@@ -13,9 +13,22 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # Your login logic here
-        return redirect(url_for('index'))
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.check_password(form.password.data):
+            session['user_id'] = user.id
+            session['username'] = user.username
+            session['role'] = user.role
+            flash('Login successful', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password', 'danger')
     return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been logged out', 'info')
+    return redirect(url_for('index'))
 
 @app.route('/submit_car', methods=['GET', 'POST'])
 def submit_car():

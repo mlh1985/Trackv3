@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Race Official Dashboard</h1>
+<button id="start-race-btn">Start Race</button>
+<button id="cleanup-btn">Cleanup</button>
+<div id="finish-line-results"></div>
+
+<script>
+document.getElementById('start-race-btn').addEventListener('click', function() {
+    fetch('/start_race', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => console.log(data));
+});
+
+document.getElementById('cleanup-btn').addEventListener('click', function() {
+    fetch('/cleanup', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => console.log(data));
+});
+
+setInterval(function() {
+    fetch('/finish_line')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('finish-line-results').innerText = JSON.stringify(data.finish_line_results);
+        });
+}, 1000);
+</script>
+{% endblock %}

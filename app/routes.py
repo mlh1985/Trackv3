@@ -9,21 +9,40 @@ from app.hardware import start_race, read_finish_line, cleanup
 def index():
     return render_template('index.html', title='Home')
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         ...
         return redirect(url_for('index'))
-    return render_template('login.html',title='Sign In', form=form)
+    return render_template('login.html', title='Sign In', form=form)
 
-@app.route('/submit_car', methods=['GET','POST'])
+@app.route('/submit_car', methods=['GET', 'POST'])
 def submit_car():
     form = CarSubmissionForm()
     if form.validate_on_submit():
         ...
         return redirect(url_for('index'))
     return render_template('submit_car.html', title='Submit Car', form=form)
+
+@app.route('/race_official_dashboard')
+def race_official_dashboard():
+    return render_template('race_official_dashboard.html', title='Race Official Dashboard')
+
+@app.route('/set_race_parameters')
+def set_race_parameters():
+    # Logic for setting race parameters
+    return render_template('set_race_parameters.html', title='Set Race Parameters')
+
+@app.route('/approve_car_submissions')
+def approve_car_submissions():
+    # Logic for approving car submissions
+    return render_template('approve_car_submissions.html', title='Approve Car Submissions')
+
+@app.route('/track_races')
+def track_races():
+    # Logic for tracking races
+    return render_template('track_races.html', title='Track Races')
 
 @app.route('/start_race', methods=['POST'])
 def handle_start_race():

@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Trailman Dashboard</h1>
+<ul>
+  <li><a href="{{ url_for('submit_car') }}">Submit Car</a></li>
+  <li><a href="{{ url_for('guest_dashboard') }}">Guest Dashboard</a></li>
+</ul>
+{% endblock %}

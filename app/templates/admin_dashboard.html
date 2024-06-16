@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<ul>
+  <li><a href="{{ url_for('setup_troop') }}">Setup / Reset Troop</a></li>
+  <li><a href="{{ url_for('reset_passwords') }}">Reset Passwords</a></li>
+</ul>
+{% endblock %}

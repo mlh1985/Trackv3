@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Racer: {{ racer.name }}</h1>
+<p>Car: {{ racer.car }}</p>
+<p>Best Time: {{ racer.best_time }}</p>
+<table>
+  <thead>
+    <tr>
+      <th>Race</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for race in racer.races %}
+    <tr>
+      <td>{{ race.name }}</td>
+      <td>{{ race.time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

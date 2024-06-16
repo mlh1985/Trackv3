@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Current Race</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Lane</th>
+      <th>Racer</th>
+      <th>Car</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for lane in lanes %}
+    <tr>
+      <td>{{ lane.number }}</td>
+      <td>{{ lane.racer }}</td>
+      <td>{{ lane.car }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

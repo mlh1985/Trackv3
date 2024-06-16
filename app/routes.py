@@ -1,5 +1,4 @@
 from flask import render_template, flash, redirect, url_for, jsonify
-from werkzeug.urls import url_quote_plus  # Updated import
 from app import app, db
 from app.forms import LoginForm, CarSubmissionForm
 from app.models import User, Race, Car
@@ -37,6 +36,38 @@ def troopmaster_dashboard():
 @app.route('/race_official_dashboard')
 def race_official_dashboard():
     return render_template('race_official_dashboard.html', title='Race Official Dashboard')
+
+@app.route('/trailman_dashboard')
+def trailman_dashboard():
+    return render_template('trailman_dashboard.html', title='Trailman Dashboard')
+
+@app.route('/guest_dashboard')
+def guest_dashboard():
+    return render_template('guest_dashboard.html', title='Guest Dashboard')
+
+@app.route('/leaderboard')
+def leaderboard():
+    # Logic for leaderboard
+    racers = []  # Replace with actual data
+    return render_template('leaderboard.html', title='Leaderboard', racers=racers)
+
+@app.route('/current_race')
+def current_race():
+    # Logic for current race
+    lanes = []  # Replace with actual data
+    return render_template('current_race.html', title='Current Race', lanes=lanes)
+
+@app.route('/next_race')
+def next_race():
+    # Logic for next race
+    lanes = []  # Replace with actual data
+    return render_template('next_race.html', title='Next Race', lanes=lanes)
+
+@app.route('/individual_racer')
+def individual_racer():
+    # Logic for individual racer
+    racer = None  # Replace with actual data
+    return render_template('individual_racer.html', title='Individual Racer', racer=racer)
 
 @app.route('/set_race_parameters')
 def set_race_parameters():

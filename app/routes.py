@@ -17,26 +17,6 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
-@app.route('/admin_dashboard')
-def admin_dashboard():
-    return render_template('admin_dashboard.html', title='Admin Dashboard')
-
-@app.route('/troopmaster_dashboard')
-def troopmaster_dashboard():
-    return render_template('troopmaster_dashboard.html', title='Troopmaster Dashboard')
-
-@app.route('/race_official_dashboard')
-def race_official_dashboard():
-    return render_template('race_official_dashboard.html', title='Race Official Dashboard')
-
-@app.route('/trailman_dashboard')
-def trailman_dashboard():
-    return render_template('trailman_dashboard.html', title='Trailman Dashboard')
-
-@app.route('/guest_dashboard')
-def guest_dashboard():
-    return render_template('guest_dashboard.html', title='Guest Dashboard')
-
 @app.route('/submit_car', methods=['GET', 'POST'])
 def submit_car():
     form = CarSubmissionForm()
@@ -44,6 +24,25 @@ def submit_car():
         # Your form submission logic here
         return redirect(url_for('index'))
     return render_template('submit_car.html', title='Submit Car', form=form)
+
+@app.route('/race_official_dashboard')
+def race_official_dashboard():
+    return render_template('race_official_dashboard.html', title='Race Official Dashboard')
+
+@app.route('/set_race_parameters')
+def set_race_parameters():
+    # Logic for setting race parameters
+    return render_template('set_race_parameters.html', title='Set Race Parameters')
+
+@app.route('/approve_car_submissions')
+def approve_car_submissions():
+    # Logic for approving car submissions
+    return render_template('approve_car_submissions.html', title='Approve Car Submissions')
+
+@app.route('/track_races')
+def track_races():
+    # Logic for tracking races
+    return render_template('track_races.html', title='Track Races')
 
 @app.route('/start_race', methods=['POST'])
 def handle_start_race():

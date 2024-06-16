@@ -84,6 +84,11 @@ def track_races():
     # Logic for tracking races
     return render_template('track_races.html', title='Track Races')
 
+@app.route('/setup_troop')
+def setup_troop():
+    # Logic for setting up/resetting troop
+    return render_template('setup_troop.html', title='Setup / Reset Troop')
+
 @app.route('/start_race', methods=['POST'])
 def handle_start_race():
     start_race()

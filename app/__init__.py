@@ -19,11 +19,13 @@ def create_admin_account():
     with app.app_context():
         admin = User.query.filter_by(username='admin').first()
         if not admin:
+            print("Admin account does not exist. Creating a new one")
             admin = User(username='admin', role='Admin')
             admin.set_password('admin')  # Set a default password
             db.session.add(admin)
             db.session.commit()
         else:
+            print("Admin account exists. Resetting password.")
             admin.set_password('admin')  # Reset password to default
             db.session.commit()
 

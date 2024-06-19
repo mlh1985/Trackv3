@@ -41,19 +41,22 @@ patrol3 = Patrol(name='Bear Patrol')
 
 patrols = [patrol1, patrol2, patrol3]
 
+# Add patrols to the session
+db.session.add_all(patrols)
+db.session.commit()
+
 # Create Trailmen (boys) and Cars
 for i, patrol in enumerate(patrols, start=1):
     for j in range(12):
         username = f'trailman{i}{j+1}'
-        trailman = User(username=username, role='Trailman')
+        trailman = User(username=username, role='Trailman', patrol=patrol)
         trailman.set_password('password')
-        car = Car(name=f'Car {username}', user=trailman, patrol=patrol)
+        car = Car(name=f'Car {username}', user=trailman, patrol_id=patrol.id)
         users.append(trailman)
         db.session.add(car)
 
-# Add all users and patrols to the session and commit
+# Add all users to the session and commit
 db.session.add_all(users)
-db.session.add_all(patrols)
 db.session.commit()
 
 print("Database populated with representative data.")

@@ -1,21 +1,37 @@
-from flask import Flask, session
+import os
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
-app = Flask(__name__)
-app.config.from_object('config.Config')
-db = SQLAlchemy(app)
-csrf = CSRFProtect(app)
+db = SQLAlchemy()
+csrf = CSRFProtect()
 
-# Create the database and the database tables
-with app.app_context():
-    db.create_all()
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('config.Config')
 
-# Import the routes and models after the app and db are defined
-from app import routes, models
+    db.init_app(app)
+    csrf.init_app(app)
 
+    with app.app_context():
+        from . import models
+        db.create_all()
+
+        # Create the uploads directory if it doesn't exist
+        UPLOAD_FOLDER = 'app/static/uploads'
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
+
+    from .routes import routes
+    app.register_blueprint(routes)
+
+    return app
+
+app = create_app()
+
+# Ensure the admin account is created or reset
 def create_admin_account():
-    from app.models import User # Import user model inside the function to avoid circular import issues
+    from app.models import User  # Import user model inside the function to avoid circular import issues
     with app.app_context():
         admin = User.query.filter_by(username='admin').first()
         if not admin:
@@ -29,5 +45,4 @@ def create_admin_account():
             admin.set_password('admin')  # Reset password to default
             db.session.commit()
 
-# Ensure the admin account is created or reset
 create_admin_account()

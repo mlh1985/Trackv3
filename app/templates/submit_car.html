@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1>Submit Car</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>
+      {{ form.car_name.label }}<br>
+      {{ form.car_name(size=32) }}
+    </div>
+    <div>
+      {{ form.car_picture.label }}<br>
+      {{ form.car_picture() }}
+    </div>
+    <div>
+      {{ form.boy_picture.label }}<br>
+      {{ form.boy_picture() }}
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+{% endblock %}

@@ -1,181 +1,230 @@
+/* Ensure the body and html are set to use the full height of the viewport */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar {
-    background-color: #343a40;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-brand {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .navbar-nav {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .navbar-nav li {
-    margin-left: 20px;
-  }
-  
-  .navbar-nav li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .navbar-nav li a:hover {
-    text-decoration: underline;
-  }
-  
-  .hero-section {
-    background: url('/static/images/hero-bg.jpg') no-repeat center center;
-    background-size: cover;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    margin-top: 60px; /* Adjust according to the height of the navbar */
-  }
-  
-  .hero-content {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .container {
-    margin: 20px;
-  }
-  
-  h1 {
-    color: #343a40;
-  }
-  
-  form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-  }
-  
-  form div {
-    margin-bottom: 10px;
-  }
-  
-  form label {
-    font-weight: bold;
-  }
-  
-  form input[type="text"],
-  form input[type="password"],
-  form input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-  }
-  
-  form input[type="submit"] {
-    background-color: #343a40;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  form input[type="submit"]:hover {
-    background-color: #495057;
-  }
-  
-  .flashes {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
-  }
-  
-  .flashes li {
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-  }
-  
-  .flashes .success {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .flashes .danger {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .flashes .info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-  }
-  
-  .footer {
-    background-color: #343a40;
-    color: white;
-    padding: 20px 0;
-  }
-  
-  .footer .container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .footer h4 {
-    margin-top: 0;
-  }
-  
-  .footer-columns {
-    display: flex;
-  }
-  
-  .footer-column {
-    margin-right: 20px;
-  }
-  
-  .footer-column ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-column ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-column ul li a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .footer-column ul li a:hover {
-    text-decoration: underline;
-  }
-  
+  font-family: 'T Serif', Arial, sans-serif;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the wrapper takes the full height of the viewport */
+}
+
+.container {
+  flex: 1; /* Take up the remaining space */
+}
+
+.navbar {
+  background-color: #ebebeb;
+  padding: 0px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 500;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  height: 80px;
+  /* Adjust the height as needed */
+}
+
+.navbar-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  color: #343a40;
+  display: block;
+}
+
+/* Slide-in navigation styles */
+.navbar-slide {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #ebebeb;
+  transition: right 0.3s ease;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navbar-slide.open {
+  right: 0;
+}
+
+.navbar-nav {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-nav li {
+  margin: 15px 0;
+}
+
+.navbar-nav li a {
+  color: #343a40;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-nav li a:hover {
+  text-decoration: underline;
+}
+
+.hero-section {
+  background: url('/static/images/topo-bg.png') no-repeat center center;
+  background-size: cover;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  margin-top: 80px; /* Adjust according to the height of the navbar */
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.container {
+  margin: 20px;
+}
+
+h1 {
+  color: #343a40;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+form input[type="submit"] {
+  background-color: #343a40;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #495057;
+}
+
+.flashes {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.flashes li {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.flashes .success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flashes .danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.flashes .info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  flex-shrink: 0; /* Ensure the footer does not shrink */
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer h4 {
+  margin-top: 0;
+}
+
+.footer-columns {
+  display: flex;
+}
+
+.footer-column {
+  margin-right: 20px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}

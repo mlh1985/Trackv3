@@ -1,8 +1,15 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<h1>Welcome to the Racetrack System</h1>
-<p>This system allows users to manage and track races. Please log in to access your dashboard.</p>
-<ul>
-  <li><a href="{{ url_for('login') }}">Login</a></li>
-</ul>
+  <div class="home-content">
+    <h1>Welcome to the Racetrack System</h1>
+    <p>Use the navigation bar to explore the system.</p>
+    <ul>
+      <li><a href="{{ url_for('routes.login') }}">Login</a></li>
+      <li><a href="{{ url_for('routes.leaderboard') }}">View Leaderboard</a></li>
+      <li><a href="{{ url_for('routes.current_race') }}">View Current Race</a></li>
+      <li><a href="{{ url_for('routes.next_race') }}">View Next Race</a></li>
+      <li><a href="{{ url_for('routes.individual_racer') }}">View Individual Racer</a></li>
+    </ul>
+  </div>
 {% endblock %}

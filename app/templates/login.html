@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>Sign In</h1>
-<form method="POST" action="{{ url_for('login')}}">
+<form method="POST" action="{{ url_for('routes.login')}}">
     {{ form.hidden_tag() }}
     <div>
         {{ form.username.label }}<br>

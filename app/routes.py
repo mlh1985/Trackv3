@@ -1,15 +1,19 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, session, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, session, jsonify
 from app import db
 from app.forms import LoginForm, CarSubmissionForm
-from app.models import User, Car, Patrol
-import os
+from app.models import User, Race, Car, Patrol
 from app.hardware import start_race, read_finish_line, cleanup
 from werkzeug.utils import secure_filename
+import os
 
 routes = Blueprint('routes', __name__)
 
-# Ensure these paths are correctly set
-UPLOAD_FOLDER = 'app/static/uploads'
+# Existing routes...
+
+@routes.route('/reset_passwords')
+def reset_passwords():
+    # Add logic to reset passwords here
+    return render_template('reset_passwords.html', title='Reset Passwords')
 
 @routes.route('/')
 @routes.route('/index')
@@ -54,12 +58,12 @@ def submit_car():
 
         if car_picture:
             car_picture_filename = secure_filename(car_picture.filename)
-            car_picture.save(os.path.join(UPLOAD_FOLDER, car_picture_filename))
+            car_picture.save(os.path.join(current_app.config['UPLOAD_FOLDER'], car_picture_filename))
             car.picture = car_picture_filename
 
         if boy_picture:
             boy_picture_filename = secure_filename(boy_picture.filename)
-            boy_picture.save(os.path.join(UPLOAD_FOLDER, boy_picture_filename))
+            boy_picture.save(os.path.join(current_app.config['UPLOAD_FOLDER'], boy_picture_filename))
             user.picture = boy_picture_filename
 
         db.session.add(car)
@@ -91,46 +95,38 @@ def guest_dashboard():
 
 @routes.route('/leaderboard')
 def leaderboard():
-    # Logic for leaderboard
     racers = []  # Replace with actual data
     return render_template('leaderboard.html', title='Leaderboard', racers=racers)
 
 @routes.route('/current_race')
 def current_race():
-    # Logic for current race
     lanes = []  # Replace with actual data
     return render_template('current_race.html', title='Current Race', lanes=lanes)
 
 @routes.route('/next_race')
 def next_race():
-    # Logic for next race
     lanes = []  # Replace with actual data
     return render_template('next_race.html', title='Next Race', lanes=lanes)
 
 @routes.route('/individual_racer')
 def individual_racer():
-    # Logic for individual racer
     racer = None  # Replace with actual data
     return render_template('individual_racer.html', title='Individual Racer', racer=racer)
 
 @routes.route('/set_race_parameters')
 def set_race_parameters():
-    # Logic for setting race parameters
     return render_template('set_race_parameters.html', title='Set Race Parameters')
 
 @routes.route('/approve_car_submissions')
 def approve_car_submissions():
-    # Logic for approving car submissions
     return render_template('approve_car_submissions.html', title='Approve Car Submissions')
 
 @routes.route('/track_races')
 def track_races():
-    # Logic for tracking races
     return render_template('track_races.html', title='Track Races')
 
 @routes.route('/setup_troop')
 def setup_troop():
-    # Logic for setting up/resetting troop
     return render_template('setup_troop.html', title='Setup / Reset Troop')
 
 @routes.route('/start_race', methods=['POST'])
